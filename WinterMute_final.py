@@ -14,7 +14,7 @@ import os
 
 
 def initial_setup(data_corpus):
-    metadata, idx_q, idx_a = data.load_data(PATH='WinterMute_final/data/{}/'.format(data_corpus))
+    metadata, idx_q, idx_a = data.load_data(PATH='WinterMute/data/{}/'.format(data_corpus))
     (trainX, trainY), (testX, testY), (validX, validY) = data.split_dataset(idx_q, idx_a)
     trainX = tl.prepro.remove_pad_sequences(trainX.tolist())
     trainY = tl.prepro.remove_pad_sequences(trainY.tolist())
