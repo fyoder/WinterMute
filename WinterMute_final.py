@@ -1,6 +1,6 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
-
+#Credit for base model : https://github.com/tensorlayer/seq2seq-chatbot
 import tensorflow as tf
 import tensorlayer as tl
 import numpy as np
@@ -81,21 +81,21 @@ if __name__ == "__main__":
         cell_enc=tf.keras.layers.GRUCell,
         cell_dec=tf.keras.layers.GRUCell,
         n_layer=3,
-        n_units=512,
+        n_units=1024,
         embedding_layer=tl.layers.Embedding(vocabulary_size=vocabulary_size, embedding_size=emb_dim),
         )
     
 
     # Uncomment below statements if you have already saved the model
 
-    load_weights = tl.files.load_npz(name='WinterMute.npz')
-    tl.files.assign_weights(load_weights, model_)
+    #load_weights = tl.files.load_npz(name='WinterMute.npz')
+    #tl.files.assign_weights(load_weights, model_)
 
     optimizer = tf.optimizers.Adam(learning_rate=0.001)
     model_.train()
 
     seeds = ["how are you doing today",
-                 "what do you think of the weather",
+                 "What do you think of that",
                  "I need a vacation"]
     for epoch in range(num_epochs):
         model_.train()
@@ -136,11 +136,4 @@ if __name__ == "__main__":
                 print(" >", ' '.join(sentence))
 
         tl.files.save_npz(model_.all_weights, name='WinterMute.npz')
-        
-
-    
-
-
-        
-    
-    
+ 
