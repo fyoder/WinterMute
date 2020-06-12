@@ -88,8 +88,8 @@ if __name__ == "__main__":
 
     # Uncomment below statements if you have already saved the model
 
-    #load_weights = tl.files.load_npz(name='WinterMute.npz')
-    #tl.files.assign_weights(load_weights, model_)
+    load_weights = tl.files.load_npz(name='WinterMute/WinterMute.npz')
+    tl.files.assign_weights(load_weights, model_)
 
     optimizer = tf.optimizers.Adam(learning_rate=0.001)
     model_.train()
