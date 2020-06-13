@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
     src_vocab_size = tgt_vocab_size = src_vocab_size + 2
 
-    num_epochs = 25
+    num_epochs = 28
     vocabulary_size = src_vocab_size
     
 
@@ -88,8 +88,8 @@ if __name__ == "__main__":
 
     # Uncomment below statements if you have already saved the model
 
-    #load_weights = tl.files.load_npz(name='WinterMute.npz')
-    #tl.files.assign_weights(load_weights, model_)
+    load_weights = tl.files.load_npz(name='WinterMute.npz')
+    tl.files.assign_weights(load_weights, model_)
 
     optimizer = tf.optimizers.Adam(learning_rate=0.001)
     model_.train()
