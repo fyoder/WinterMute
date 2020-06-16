@@ -94,8 +94,8 @@ if __name__ == "__main__":
     optimizer = tf.optimizers.Adam(learning_rate=0.001)
     model_.train()
 
-    seeds = ["how are you doing today",
-                 "What do you think of that",
+    seeds = ["Hello how are you",
+                 "I think I love you",
                  "I need a vacation"]
     for epoch in range(num_epochs):
         model_.train()
