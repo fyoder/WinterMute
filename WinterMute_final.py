@@ -88,7 +88,7 @@ if __name__ == "__main__":
 
     # Uncomment below statements if you have already saved the model
 
-    #load_weights = tl.files.load_npz(name='WinterMute.npz')
+    #load_weights = tl.files.load_npz(name='WinterMute_rms_512.npz')
     #tl.files.assign_weights(load_weights, model_)
 
     #optimizer = tf.optimizers.Adam(learning_rate=0.001)
@@ -136,5 +136,5 @@ if __name__ == "__main__":
                 sentence = inference(seed, top_n)
                 print(" >", ' '.join(sentence))
 
-        tl.files.save_npz(model_.all_weights, name='WinterMute.npz')
+        tl.files.save_npz(model_.all_weights, name='WinterMute_rms_512.npz')
  
