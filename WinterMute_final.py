@@ -80,18 +80,19 @@ if __name__ == "__main__":
         decoder_seq_length = decoder_seq_length,
         cell_enc=tf.keras.layers.GRUCell,
         cell_dec=tf.keras.layers.GRUCell,
-        n_layer=3,
-        n_units=1024,
+        n_layer=4,
+        n_units=512,
         embedding_layer=tl.layers.Embedding(vocabulary_size=vocabulary_size, embedding_size=emb_dim),
         )
     
 
     # Uncomment below statements if you have already saved the model
 
-    load_weights = tl.files.load_npz(name='WinterMute.npz')
-    tl.files.assign_weights(load_weights, model_)
+    #load_weights = tl.files.load_npz(name='WinterMute.npz')
+    #tl.files.assign_weights(load_weights, model_)
 
-    optimizer = tf.optimizers.Adam(learning_rate=0.001)
+    #optimizer = tf.optimizers.Adam(learning_rate=0.001)
+    optimizer = tf.optimizers.RMSprop(learning_rate=0.001)
     model_.train()
 
     seeds = ["Hello how are you",
