@@ -8,7 +8,8 @@ from tensorlayer.cost import cross_entropy_seq, cross_entropy_seq_with_mask
 from tqdm import tqdm
 from sklearn.utils import shuffle
 from data.twitter import data
-from tensorlayer.models.seq2seq import Seq2seq
+from seq2seq import Seq2seq
+#from tensorlayer.models.seq2seq import Seq2seq
 from tensorlayer.models.seq2seq_with_attention import Seq2seqLuongAttention
 import os
 
@@ -27,7 +28,7 @@ def initial_setup(data_corpus):
 
 
 if __name__ == "__main__":
-    data_corpus = "combined"
+    data_corpus = "cornell_corpus"
 
     #data preprocessing
     metadata, trainX, trainY, testX, testY, validX, validY = initial_setup(data_corpus)
@@ -58,7 +59,7 @@ if __name__ == "__main__":
 
     src_vocab_size = tgt_vocab_size = src_vocab_size + 2
 
-    num_epochs = 5
+    num_epochs = 10
     vocabulary_size = src_vocab_size
     
 
@@ -66,7 +67,7 @@ if __name__ == "__main__":
     def inference(seed, top_n):
         model_.eval()
         seed_id = [word2idx.get(w, unk_id) for w in seed.split(" ")]
-        sentence_id = model_(inputs=[[seed_id]], seq_length=20, start_token=start_id, top_n = top_n)
+        sentence_id = model_(inputs=[[seed_id]], seq_length=25, start_token=start_id, top_n = top_n)
         sentence = []
         for w_id in sentence_id[0]:
             w = idx2word[w_id]
@@ -75,20 +76,20 @@ if __name__ == "__main__":
             sentence = sentence + [w]
         return sentence
 
-    decoder_seq_length = 20
+    decoder_seq_length = 25
     model_ = Seq2seq(
         decoder_seq_length = decoder_seq_length,
         cell_enc=tf.keras.layers.GRUCell,
         cell_dec=tf.keras.layers.GRUCell,
-        n_layer=4,
-        n_units=512,
+        n_layer=3,
+        n_units=1024,
         embedding_layer=tl.layers.Embedding(vocabulary_size=vocabulary_size, embedding_size=emb_dim),
         )
     
 
     # Uncomment below statements if you have already saved the model
 
-    #load_weights = tl.files.load_npz(name='WinterMute_rms_512.npz')
+    #load_weights = tl.files.load_npz(name='WinterMute_rms512_cornell.npz')
     #tl.files.assign_weights(load_weights, model_)
 
     #optimizer = tf.optimizers.Adam(learning_rate=0.001)
@@ -131,10 +132,10 @@ if __name__ == "__main__":
 
         for seed in seeds:
             print("Query >", seed)
-            top_n = 1
+            top_n = 3
             for i in range(top_n):
                 sentence = inference(seed, top_n)
                 print(" >", ' '.join(sentence))
 
-        tl.files.save_npz(model_.all_weights, name='WinterMute_rms_512.npz')
+        tl.files.save_npz(model_.all_weights, name='WinterMute_rms512_cornell.npz')
  
