@@ -132,7 +132,7 @@ if __name__ == "__main__":
 
         for seed in seeds:
             print("Query >", seed)
-            top_n = 3
+            top_n = 1
             for i in range(top_n):
                 sentence = inference(seed, top_n)
                 print(" >", ' '.join(sentence))
