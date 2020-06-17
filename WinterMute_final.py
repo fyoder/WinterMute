@@ -10,7 +10,6 @@ from sklearn.utils import shuffle
 from data.twitter import data
 from seq2seq import Seq2seq
 #from tensorlayer.models.seq2seq import Seq2seq
-from tensorlayer.models.seq2seq_with_attention import Seq2seqLuongAttention
 import os
 
 
@@ -59,7 +58,7 @@ if __name__ == "__main__":
 
     src_vocab_size = tgt_vocab_size = src_vocab_size + 2
 
-    num_epochs = 10
+    num_epochs = 5
     vocabulary_size = src_vocab_size
 
     decoder_seq_length = 25
@@ -75,7 +74,7 @@ if __name__ == "__main__":
 
     # Uncomment below statements if you have already saved the model
 
-    load_weights = tl.files.load_npz(name='WinterMute_rms512_cornell.npz')
+    load_weights = tl.files.load_npz(name='WinterMute_rms1024_cornell.npz')
     tl.files.assign_weights(load_weights, model_)
 
     #optimizer = tf.optimizers.Adam(learning_rate=0.001)
