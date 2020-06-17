@@ -113,5 +113,5 @@ if __name__ == "__main__":
         # printing average loss after every epoch
         print('Epoch [{}/{}]: loss {:.4f}'.format(epoch + 1, num_epochs, total_loss / n_iter))
 
-        tl.files.save_npz(model_.all_weights, name='WinterMute_rms512_cornell.npz')
+        tl.files.save_npz(model_.all_weights, name='WinterMute_rms1024_cornell.npz')
  
