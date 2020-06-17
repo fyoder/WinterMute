@@ -61,20 +61,6 @@ if __name__ == "__main__":
 
     num_epochs = 10
     vocabulary_size = src_vocab_size
-    
-
-
-    def inference(seed, top_n):
-        model_.eval()
-        seed_id = [word2idx.get(w, unk_id) for w in seed.split(" ")]
-        sentence_id = model_(inputs=[[seed_id]], seq_length=25, start_token=start_id, top_n = top_n)
-        sentence = []
-        for w_id in sentence_id[0]:
-            w = idx2word[w_id]
-            if w == 'end_id':
-                break
-            sentence = sentence + [w]
-        return sentence
 
     decoder_seq_length = 25
     model_ = Seq2seq(
@@ -96,9 +82,6 @@ if __name__ == "__main__":
     optimizer = tf.optimizers.RMSprop(learning_rate=0.001)
     model_.train()
 
-    seeds = ["Hello how are you",
-                 "I think I love you",
-                 "I need a vacation"]
     for epoch in range(num_epochs):
         model_.train()
         trainX, trainY = shuffle(trainX, trainY, random_state=0)
@@ -129,13 +112,6 @@ if __name__ == "__main__":
 
         # printing average loss after every epoch
         print('Epoch [{}/{}]: loss {:.4f}'.format(epoch + 1, num_epochs, total_loss / n_iter))
-
-        for seed in seeds:
-            print("Query >", seed)
-            top_n = 1
-            for i in range(top_n):
-                sentence = inference(seed, top_n)
-                print(" >", ' '.join(sentence))
 
         tl.files.save_npz(model_.all_weights, name='WinterMute_rms512_cornell.npz')
  
