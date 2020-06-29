@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
     src_vocab_size = tgt_vocab_size = src_vocab_size + 2
 
-    num_epochs = 1
+    num_epochs = 10
     vocabulary_size = src_vocab_size
 
     decoder_seq_length = 25
@@ -77,8 +77,8 @@ if __name__ == "__main__":
     load_weights = tl.files.load_npz(name='WinterMute_rms1024_cornell.npz')
     tl.files.assign_weights(load_weights, model_)
 
-    #optimizer = tf.optimizers.Adam(learning_rate=0.001)
-    optimizer = tf.optimizers.RMSprop(learning_rate=0.001)
+    optimizer = tf.optimizers.Adam(learning_rate=0.001)
+    #optimizer = tf.optimizers.RMSprop(learning_rate=0.001)
     model_.train()
 
     for epoch in range(num_epochs):
